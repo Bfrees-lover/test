@@ -1,8 +1,6 @@
 from db.database import SessionLocal
 from core.models import Player, Character, Item, Match
-from utils.board_renderer import render_board_cli
-from core.equipment import generate_random_item
-from server.match_service import end_match
+from core.board import generate_valid_board
 
 def admin_list_players():
     db = SessionLocal()
@@ -23,11 +21,8 @@ def admin_give_item(player_id: int):
         print("❌ Персонаж не найден")
         db.close()
         return
-    item = generate_random_item()
-    item.character_id = char.id
-    db.add(item)
-    db.commit()
-    print(f"✅ Выдано: {item.name}")
+    # TODO: Реализовать систему предметов
+    print("⚠️ Система предметов временно отключена")
     db.close()
 
 def admin_remove_item(player_id: int, item_index: int):
@@ -59,9 +54,9 @@ def admin_show_board(match_id: int):
         db.close()
         return
     print(f"\n🎮 Текущая доска матча #{match.id}:")
-    print(render_board_cli(match.board_state))
+    print("Доска временно недоступна (функция отображения CLI отключена)")
     print(f"\n🆕 Стартовая доска:")
-    print(render_board_cli(match.initial_board_state))
+    print("Доска временно недоступна (функция отображения CLI отключена)")
     db.close()
 
 def admin_end_match(match_id: int):
