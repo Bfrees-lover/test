@@ -24,6 +24,7 @@ Match3 MMORPG - это игра в жанре Match-3 с элементами RP
 
 ## Запуск
 
+### Локальный запуск
 ```bash
 # Установка зависимостей
 pip install -r requirements.txt
@@ -32,12 +33,69 @@ pip install -r requirements.txt
 python main.py
 ```
 
+### Запуск в Docker
+
+#### На Linux:
+```bash
+# Запуск X-сервера для X11-forwarding (если еще не запущен)
+export DISPLAY=:0
+
+# Запуск приложения в Docker
+docker-compose up --build
+```
+
+#### На macOS:
+Сначала установите XQuartz и включите "Allow connections from network clients" в настройках.
+```bash
+# Установка IP для X11-forwarding
+IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+export DISPLAY=$IP:0
+
+# Запуск приложения в Docker
+docker-compose up --build
+```
+
+#### На Windows:
+Используйте WSL2 с X-сервером (например, VcXsrv или Xming).
+
+### Разработка в Docker
+
+Для разработки с возможностью изменения кода "на лету":
+```bash
+# Запуск контейнера с монтированием исходного кода
+docker-compose -f docker-compose.dev.yml up --build
+
+# В отдельном терминале подключение к контейнеру
+docker exec -it match3_mmo_dev bash
+
+# Запуск игры внутри контейнера
+./start_game.sh
+```
+
+Также можно использовать Makefile для управления проектом:
+```bash
+# Сборка проекта
+make build
+
+# Запуск проекта
+make run
+
+# Просмотр логов
+make logs
+
+# Остановка проекта
+make stop
+```
+
 ## Технологии
 
 - Python 3.11+
 - Pygame для графики
 - SQLAlchemy для работы с базой данных
+- SQLite для хранения данных
 - Docker для контейнеризации
+- Docker Compose для orchestration
+- Make для автоматизации задач
 
 ## Управление
 
