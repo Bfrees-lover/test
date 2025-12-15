@@ -39,4 +39,11 @@ reset-db:
 # Полный сброс и пересоздание
 fresh-start: reset-db clean start
 
-.PHONY: build run start stop restart logs clean shell reset-db fresh-start
+# Команды для Windows
+run-windows:
+	cmd /c run_docker.bat
+
+run-powershell:
+	powershell -ExecutionPolicy Bypass -File ./run_docker.ps1
+
+.PHONY: build run start stop restart logs clean shell reset-db fresh-start run-windows run-powershell

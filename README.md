@@ -56,7 +56,29 @@ docker-compose up --build
 ```
 
 #### На Windows:
-Используйте WSL2 с X-сервером (например, VcXsrv или Xming).
+##### Вариант 1: Использование WSL2 и X-сервера
+1. Установите WSL2 с Ubuntu
+2. Установите X-сервер (например, VcXsrv или Xming)
+3. Запустите X-сервер с настройками:
+   - Display number: 0
+   - Check "Disable access control"
+4. В WSL2 выполните:
+```bash
+export DISPLAY=:0
+docker-compose up --build
+```
+
+##### Вариант 2: Использование готового скрипта
+Запустите файл `run_docker.bat` двойным кликом или из командной строки:
+```cmd
+run_docker.bat
+```
+
+##### Вариант 3: Ручной запуск в PowerShell
+```powershell
+$env:DISPLAY = "host.docker.internal:0"
+docker-compose up --build
+```
 
 ### Разработка в Docker
 

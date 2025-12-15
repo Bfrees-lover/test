@@ -1,7 +1,7 @@
 services:
   match3-app:
     build: .
-    container_name: match3_mmo
+    container_name: match3_mmo_prod
     # Монтируем том для сохранения БД
     volumes:
       - ./match3.db:/app/match3.db
@@ -17,3 +17,4 @@ services:
     stdin_open: true
     tty: true
     privileged: true
+    restart: unless-stopped

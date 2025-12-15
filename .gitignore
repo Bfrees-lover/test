@@ -1,38 +1,34 @@
 ```
 # Dependencies
 node_modules/
+.venv/
+venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+target/
+.gradle/
 
 # Logs and temp files
 *.log
 *.tmp
+*.swp
+*.out
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
 .idea/
 
-# Docker related
-.dockerignore
-*.dockerignore
-
-# Build artifacts
-dist/
-build/
-target/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.o
-*.obj
-*.so
-*.dll
-*.exe
-*.out
+# OS
+.DS_Store
+Thumbs.db
 
 # Compressed files
 *.zip
@@ -53,45 +49,8 @@ __pycache__/
 *.Z
 *.lz
 *.lzo
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Python specific
-*.pyc
-*.pyo
-__pycache__/
-.Python
-*.egg-info/
-.eggs/
-
-# Virtual environments
-venv/
-.venv/
-env/
-.env/
-
-# IDE specific
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# MyPy cache
-.mypy_cache/
-# Pytest cache
-.pytest_cache/
-
-# Gradle
-.gradle/
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.backup
-
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
 ```
