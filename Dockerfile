@@ -1,5 +1,5 @@
-# Используем официальный образ Python 3.11
-FROM python:3.11-slim
+# Используем официальный образ Python 3.11.5
+FROM python:3.11.5-slim
 
 # Устанавливаем необходимые системные зависимости для pygame и GUI
 RUN apt-get update && apt-get install -y \
