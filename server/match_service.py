@@ -1,11 +1,9 @@
 from sqlalchemy.orm import Session
 from db.database import SessionLocal
 from core.models import Player, Character, Item, Match
-from core.board import generate_valid_board, apply_move_and_cascade  # ← обе функции
+from core.board import generate_valid_board, apply_move_and_cascade
 from core.bot_ai import bot_find_best_move
 from core.elo import update_elo
-from core.equipment import generate_random_item
-from kafka_utils.producer import send_match_result
 from datetime import datetime, timedelta
 from copy import deepcopy
 
@@ -116,17 +114,8 @@ def end_match(match_id: int, db: Session):
         bot_rating = 1200.0
         new_r1, _ = update_elo(p1.elo_rating, bot_rating, outcome)
         p1.elo_rating = new_r1
-    # Награда победителю
+    # Награда победителю (временно отключено до реализации системы предметов)
     if winner_id == match.player1_id:
-        item = generate_random_item()
-        char1 = db.query(Character).filter(Character.player_id == match.player1_id).first()
-        item.character_id = char1.id
-        db.add(item)
+        # TODO: Реализовать награду победителю (система предметов)
+        pass
     db.commit()
-    send_match_result({
-        "match_id": match.id,
-        "winner_id": winner_id,
-        "player1_score": player_score,
-        "bot_score": bot_score if match.player2_id < 0 else None,
-        "timeout": match.is_timeout
-    })
