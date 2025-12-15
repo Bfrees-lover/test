@@ -3,10 +3,12 @@ version: '3.8'
 services:
   match3-app:
     build: .
-    container_name: match3_mmo
+    container_name: match3_mmo_dev
     # Монтируем том для сохранения БД
     volumes:
       - ./match3.db:/app/match3.db
+      # Для разработки монтируем весь проект как volume для hot-reload
+      - ./:/app
       # Для Linux X11 forwarding
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
@@ -18,3 +20,5 @@ services:
     network_mode: host
     stdin_open: true
     tty: true
+    # Для разработки перезаписываем команду, чтобы можно было подключиться к контейнеру
+    command: ["tail", "-f", "/dev/null"]
